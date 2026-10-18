@@ -1,0 +1,123 @@
+/* eslint-disable react-refresh/only-export-components */
+import {createContext, useContext, useEffect, useMemo, useState} from 'react';
+
+export const ar = {
+  'Home':'الرئيسية', 'Main navigation':'التنقل الرئيسي', 'Open navigation':'فتح القائمة', 'Close navigation':'إغلاق القائمة', 'Open profile and contact menu':'فتح قائمة الحساب والتواصل', 'Call me':'اتصل بي', 'My projects':'مشاريعي', 'Khamsat':'خمسات','My services on Khamsat':'خدماتي على خمسات', 'Portrait of Mohamed Ahmed Waly':'صورة محمد أحمد والي', 'Building for the web':'مطور واجهات ويب', 'Pearl Dental Clinic':'عيادة بيرل للأسنان', 'Dental Clinic Website':'موقع عيادة أسنان', 'Real project rebuilt in React':'تطوير لمشروع سابق باستخدام React', 'A bilingual dental clinic website with services, responsive navigation and a demonstration appointment form.':'موقع عيادة أسنان بالعربي والإنجليزي يضم الخدمات وقائمة متجاوبة ونموذج حجز تجريبي.', 'Beautiful care. Confident smiles.':'رعاية مميزة وابتسامة واثقة.', 'Bilingual clinic website and RTL-friendly layout':'موقع بلغتين وتصميم مناسب للعربية', 'Services, hours and responsive navigation':'أقسام للخدمات والمواعيد وقائمة متجاوبة', 'Demo appointment requests with local confirmation':'نموذج تجريبي لطلبات الحجز', 'The original HTML/CSS project contained unfinished placeholder sections and non-functional links.':'المشروع الأصلي كان فيه أقسام تجريبية وروابط غير مكتملة.', 'I rebuilt the concept in React with accessible navigation, relevant bilingual content and a demo booking flow without claiming real appointments.':'طورت الفكرة بـ React مع قائمة سهلة الوصول ومحتوى عربي وإنجليزي ونموذج حجز تجريبي لا يؤكد مواعيد فعلية.', 'Source-based rebuild':'إعادة بناء من مشروع أصلي', 'Phone':'الهاتف', 'WhatsApp':'واتساب', 'Contact on WhatsApp':'تواصل على واتساب', 'This is a portfolio concept based on my earlier HTML/CSS project, not an operating clinic or live appointment system.':'ده مشروع تجريبي مبني على نسختي السابقة بـ HTML وCSS، مش عيادة فعلية أو نظام حجز حقيقي.',
+  'Pearl Dental Clinic is a React rebuild of my earlier project; Aura and Flowboard are personal demos.':'Pearl Dental Clinic تطوير لمشروعي السابق، وAura وFlowboard مشروعان تجريبيان شخصيان.',
+  'About':'عني','Nothing to see here.':'الصفحة غير موجودة','Go Home':'العودة للرئيسية','· Updated just now':'· تم التحديث الآن','DASHBOARD':'لوحة البيانات','100k':'100 ألف','75k':'75 ألف','50k':'50 ألف','25k':'25 ألف', 'CSS Frameworks':'أطر عمل CSS', 'Remove one':'حذف قطعة', 'Add one':'إضافة قطعة', 'Remove':'حذف', 'Move task':'نقل المهمة', 'Task moved to':'تم نقل المهمة إلى', 'items':'عناصر', 'Case study ↗':'تفاصيل المشروع ↗', '↓ Export report':'↓ تصدير التقرير', '● SAMPLE DATA':'● بيانات تجريبية', '+ New task':'+ مهمة جديدة', '+ Add a task':'+ إضافة مهمة', 'Preview checkout →':'معاينة إتمام الطلب ←', '← Back to case study':'→ العودة لتفاصيل المشروع', '✦ Interactive demo: tasks are saved in your browser. No account or backend required.':'✦ تجربة تفاعلية: المهام محفوظة في متصفحك بدون حساب أو خادم', 'Explore collection ↗':'تصفح المجموعة ↗', 'Skills':'المهارات', 'Expertise':'المهارات', 'Work':'أعمالي', 'Projects':'المشاريع', 'Contact':'تواصل', 'Contact Me':'تواصل معي',
+  'View Projects':'شاهد المشاريع','View details':'عرض التفاصيل','Case study':'تفاصيل المشروع','Live demo':'جرّب المشروع','Live':'تجربة مباشرة','Explore collection':'تصفّح المجموعة',
+  'Front-End Developer':'مطور واجهات أمامية','Front-End / React Developer':'مطور واجهات أمامية وReact',
+  'Available for projects':'متاح لتنفيذ مشاريع', 'Hi, I’m':'أهلًا، أنا', 'Hi, I\'m':'أهلًا، أنا','I build websites that feel simple and work beautifully.':'بصمّم وبطوّر مواقع سهلة الاستخدام وشكلها مميز.',
+  'I create clean, responsive web experiences using React, JavaScript, and a love for the small details.':'ببني واجهات ويب سريعة ومتجاوبة باستخدام React وJavaScript، وباهتم بالتفاصيل اللي بتفرق.',
+  'View my work':'شوف شغلي','Let’s talk':'خلّينا نتكلم','Let\'s talk':'خلّينا نتكلم','Built with care':'متصمم بعناية', 'Responsive on every screen':'متوافق مع كل الشاشات',
+  'A little about me':'نبذة عني','About me':'عني','Making the web feel easier.':'بخلّي تجربة الويب أبسط وأفضل.',
+  'I’m Mohamed, a front-end developer who enjoys building clear, fast, and responsive interfaces. I focus on usability, clean code, and thoughtful details.':'أنا محمد، مطور واجهات أمامية بحب أبني مواقع واضحة وسريعة ومتجاوبة. بركّز على سهولة الاستخدام والكود المنظم والتفاصيل الدقيقة.',
+  'My goal is simple: turn ideas into websites people enjoy using.':'هدفي بسيط: أحوّل الأفكار لمواقع الناس تستمتع باستخدامها.',
+  'Clean interfaces':'واجهات مرتبة','Responsive layouts':'تصميم متجاوب','React development':'تطوير بـ React',
+  'The languages and tools I use to build for the web.':'اللغات والأدوات اللي بستخدمها في تطوير الويب.',
+  'Semantic and accessible markup':'هيكلة سليمة وسهلة الوصول','Flexbox, Grid and responsive design':'Flexbox وGrid والتصميم المتجاوب',
+  'Tailwind and Bootstrap':'Tailwind وBootstrap','Modern ES6+ and the DOM':'JavaScript الحديثة وDOM','Components, hooks and routing':'المكوّنات والـ Hooks والتنقّل بين الصفحات','Object-oriented programming':'البرمجة كائنية التوجه',
+  'Selected projects':'مشاريع مختارة','A few things I’ve built with React.':'نماذج من المشاريع اللي بنيتها باستخدام React.',
+  'Personal demo projects, not client commissions.':'مشاريع تجريبية شخصية وليست أعمالًا لعملاء.',
+  'See the code':'عرض الكود','Back to projects':'العودة للمشاريع','All projects':'كل المشاريع','Launch demo':'افتح المشروع','Launch live demo':'جرّب المشروع',
+  'Overview':'نظرة عامة','The challenge':'التحدّي','The approach':'طريقة الحل','Key features':'أهم المميزات','Features':'المميزات',
+  'What it does':'ماذا يقدّم؟','The problem':'المشكلة','The solution':'الحل','Explore interactive demo':'جرّب النسخة التفاعلية',
+  'This is a personal demo project using illustrative content and data.':'ده مشروع شخصي تجريبي، والبيانات المعروضة للتوضيح فقط.',
+  'Let’s build something great.':'خلّينا نعمل حاجة مميزة.','Have a project in mind?':'عندك فكرة مشروع؟',
+  'I’m open to freelance projects and front-end opportunities. Send me a message and let’s talk about your idea.':'متاح لمشاريع العمل الحر وفرص تطوير الواجهات الأمامية. ابعتلي ونبدأ نتكلم عن فكرتك.',
+  'Email':'البريد الإلكتروني','Your name':'اسمك','Your email':'بريدك الإلكتروني','Project details':'تفاصيل المشروع',
+  'Start a conversation':'ابدأ تواصل','Tell me a little about your project.':'احكيلي شوية عن مشروعك.',
+  'What are you working on?':'إيه فكرة مشروعك؟','Open email to send':'فتح البريد للإرسال','Contact form setup required':'محتاج إضافة البريد الإلكتروني',
+  'Opens your email app with your message ready to send.':'بيفتح برنامج البريد برسالتك جاهزة للإرسال.',
+  'Add your email in src/data/socials.js to enable contact.':'أضف بريدك في src/data/socials.js لتفعيل التواصل.',
+  'Based in':'مقيم في','Egypt · Remote':'مصر · عمل عن بُعد','Back to top':'العودة للأعلى','Back to portfolio':'العودة للبورتفوليو',
+  'Made with React.':'مصنوع باستخدام React.',
+  'Dashboard':'لوحة بيانات','SaaS Dashboard':'لوحة تحليلات','E-commerce Experience':'متجر إلكتروني','Productivity App':'تطبيق لإدارة المهام',
+  'Northstar Analytics':'Northstar Analytics','Aura Commerce':'Aura Commerce','Flowboard':'Flowboard',
+  'Make complex data feel effortless.':'تحليلات واضحة من غير تعقيد.','A storefront with personality.':'متجر أنيق وسهل التصفح.','Less busywork. More momentum.':'تنظيم أسهل وإنجاز أسرع.',
+  'A responsive analytics workspace with interactive time ranges, KPI comparisons, a revenue chart and channel breakdowns.':'لوحة تحليلات متجاوبة فيها فترات زمنية تفاعلية ومؤشرات أداء ورسوم بيانية ومصادر الزيارات.',
+  'An editorial shopping experience with product search, category filtering, a persistent cart and a responsive checkout summary.':'متجر إلكتروني فيه بحث وفلاتر للأقسام وسلة مشتريات محفوظة وملخص للطلب.',
+  'A modern Kanban workspace for creating, searching and organizing tasks, with quick status changes and local persistence.':'لوحة كانبان لإنشاء المهام والبحث عنها وتنظيمها ونقلها بين المراحل مع حفظ التغييرات.',
+  'Interactive 7 / 30 / 90 day reporting':'تقارير تفاعلية لـ 7 و30 و90 يومًا', 'Responsive analytics widgets and charts':'مؤشرات ورسوم متجاوبة', 'Channel performance and recent activity':'مصادر الزيارات وأحدث العمليات',
+  'Live search and category filters':'بحث مباشر وفلاتر الأقسام','Add, remove and update cart quantities':'إضافة المنتجات وتعديل الكميات وحذفها','Persistent cart with a clear order summary':'سلة محفوظة وملخص واضح للطلب',
+  'Create, edit and delete tasks':'إنشاء المهام وتعديلها وحذفها','Move work across Kanban stages':'نقل المهام بين المراحل','Search tasks and keep changes after refresh':'البحث وحفظ التغييرات بعد تحديث الصفحة',
+  'Data-heavy dashboards often become difficult to scan and break down on small screens.':'لوحات البيانات المليانة أرقام ممكن تكون صعبة القراءة على الشاشات الصغيرة.',
+  'A calm visual hierarchy, compact metric cards and responsive charts keep the most useful information visible at every size.':'تنظيم بصري هادئ وكروت مختصرة ورسوم متجاوبة بتخلّي المعلومات المهمة واضحة على كل الأجهزة.',
+  'Online stores need visual storytelling without sacrificing speed, clarity or ease of purchase.':'المتاجر محتاجة شكل جذاب من غير ما تضحّي بسرعة التصفح أو سهولة الشراء.',
+  'A product-first layout combines expressive imagery with frictionless discovery and a lightweight, persistent cart.':'عرض واضح للمنتجات مع بحث وفلاتر وسلة خفيفة محفوظة محليًا.',
+  'Task tools can feel overwhelming when simple actions require too many clicks.':'تطبيقات المهام ممكن تبقى معقدة لما أبسط إجراء يحتاج خطوات كثيرة.',
+  'A focused three-stage workflow and quick interactions make prioritizing work feel effortless, even on a phone.':'ثلاث مراحل واضحة وتحكّم سريع في المهام لتسهيل التنظيم حتى من الموبايل.',
+  'Interactive concept':'مشروع تجريبي تفاعلي',
+  // Dashboard application
+  'WORKSPACE':'مساحة العمل','Workspace':'مساحة العمل','Analytics':'التحليلات','Audience':'الجمهور','Campaigns':'الحملات',
+  'Demo workspace':'مساحة تجريبية','Portfolio concept':'مشروع للبورتفوليو','SAMPLE DATA':'بيانات تجريبية',
+  'Good morning, Mohamed':'صباح الخير يا محمد',
+  "Here's what's happening with your business today.":'ملخص لأهم الأرقام في مشروعك اليوم.',
+  'Revenue analytics':'تحليلات الإيرادات','Your performance, at a glance':'أداؤك في نظرة سريعة','Explore how your key metrics change over time.':'تابع تغيّر مؤشرات الأداء بمرور الوقت.',
+  'Get to know your audience':'تعرّف على جمهورك','Understand visitors, engagement, and where attention comes from.':'افهم الزوار والتفاعل ومصادر الزيارات.',
+  'Audience growth':'نمو الجمهور','Campaigns in motion':'الحملات النشطة','A closer look at how your recent campaigns are performing.':'ملخص أداء أحدث حملاتك.', 'Campaign reach':'وصول الحملات',
+  'Export report':'تصدير التقرير','Performance overview':'نظرة عامة على الأداء','Updated just now':'تم التحديث الآن',
+  '7 days':'7 أيام','30 days':'30 يومًا','90 days':'90 يومًا',
+  'Total revenue':'إجمالي الإيرادات','Active users':'المستخدمون النشطون','Total orders':'إجمالي الطلبات','Conversion rate':'معدل التحويل',
+  'Total visitors':'إجمالي الزوار','Returning visitors':'الزوار العائدون','Avg. session':'متوسط الجلسة','Attributed revenue':'إيرادات الحملات','Engagement':'التفاعل',
+  'vs. previous period':'مقارنة بالفترة السابقة','Performance over time':'الأداء عبر الوقت','Revenue':'الإيرادات','Visitors':'الزوار',
+  'Traffic sources':'مصادر الزيارات','Where visitors come from':'من أين يأتي الزوار؟','TRAFFIC':'الزيارات','Organic search':'البحث المجاني','Direct':'مباشر','Social':'التواصل الاجتماعي','Referral':'الإحالات',
+  'Recent activity':'أحدث الأنشطة','Your latest transactions':'آخر المعاملات','Live preview':'معاينة تجريبية','ACTIVITY':'النشاط','DATE':'التاريخ','AMOUNT':'المبلغ',
+  'New subscription':'اشتراك جديد','Premium plan':'الباقة المميزة','Online store':'متجر إلكتروني','Monthly renewal':'تجديد شهري','Growth plan':'باقة النمو',
+  'Today, 10:42 AM':'اليوم، 10:42 ص','Today, 09:18 AM':'اليوم، 09:18 ص','Yesterday':'أمس',
+  'Demo dashboard · All metrics and transactions are illustrative, not live business data.':'لوحة بيانات تجريبية · كل الأرقام والمعاملات للعرض فقط وليست بيانات حقيقية.',
+  'Revenue and visitor trends':'تغيّر الإيرادات والزوار',
+  // Store application
+  'A thoughtfully curated collection · Demo storefront':'مجموعة مختارة بعناية · متجر تجريبي',
+  'Store categories':'أقسام المتجر','Shop all':'تسوق الكل','All':'الكل','Furniture':'أثاث','Lighting':'إضاءة','Decor':'ديكور',
+  'Bag':'السلة','THE ART OF EVERYDAY LIVING':'فن التفاصيل اليومية','Objects for a':'قطع من أجل','beautiful life.':'حياة أجمل.',
+  'Good design belongs in every corner. Discover pieces made for slow mornings, small moments, and everything in between.':'التصميم الجميل يستحق يكون في كل ركن. اكتشف قطعًا بسيطة وأنيقة لتفاصيل يومك.',
+  'Featured decorative lamp and vase':'مصباح ومزهرية للعرض','THE ESSENTIALS / VOL. 01':'الأساسيات / الإصدار 01',
+  '01 — HANDPICKED FOR YOU':'01 — اختيارات مخصوص ليك','The collection':'المجموعة','Timeless forms. Everyday comfort.':'تصاميم بسيطة وراحة كل يوم.',
+  'products':'منتجات','Search pieces...':'ابحث عن منتج...','Search products':'البحث عن المنتجات','Sort products':'ترتيب المنتجات',
+  'Featured':'الأبرز','Price: low to high':'السعر: من الأقل للأعلى','Price: high to low':'السعر: من الأعلى للأقل',
+  'BESTSELLER':'الأكثر مبيعًا','NEW ARRIVAL':'وصل حديثًا','POPULAR':'مميز',
+  'Solace Lounge Chair':'كرسي سولاس المريح','Luma Table Lamp':'مصباح لوما','Forma Ceramic Vase':'مزهرية فورما',
+  'Arc Studio Chair':'كرسي آرك','Orbit Pendant Light':'مصباح أوربت المعلق','Stoneware Set':'طقم ستون وير',
+  'No pieces match your search. Try a different keyword or category.':'مفيش منتجات مطابقة. جرّب كلمة تانية أو قسم مختلف.',
+  'Considered objects for considered living.':'تصميم جميل لحياة أبسط.','Personal concept · Demo checkout only':'مشروع شخصي · الدفع تجريبي فقط',
+  'Shopping bag':'سلة التسوق','Your bag':'سلتك','Thoughtful choices, great taste.':'اختيارات جميلة وذوق مميز.',
+  'Close bag':'إغلاق السلة','Order preview complete':'اكتملت معاينة الطلب','This is a portfolio demo; no payment was taken and no order was placed.':'دي تجربة داخل البورتفوليو، ما تمش دفع فلوس أو تنفيذ طلب حقيقي.',
+  'Continue exploring':'كمّل التصفح','Your bag is empty':'سلتك فاضية','Find something you’ll love.':'دور على حاجة تعجبك.','Find something you\'ll love.':'دور على حاجة تعجبك.',
+  'Subtotal':'الإجمالي الفرعي','Shipping and taxes are not calculated in this demo.':'الشحن والضرائب مش محسوبين في التجربة.',
+  'Preview checkout':'معاينة إتمام الطلب','Open cart':'فتح السلة','Add to bag':'أضف للسلة',
+  // Task app
+  'Back to case study':'العودة لتفاصيل المشروع','MY WORKSPACE':'مساحة عملي','PROJECT BOARD':'لوحة المشروع',
+  'Design & Development':'التصميم والتطوير','Keep projects moving, one task at a time.':'نظّم شغلك مهمة بمهمة.',
+  'New task':'مهمة جديدة','Total tasks':'إجمالي المهام','In progress':'قيد التنفيذ','Completed':'المكتمل','Progress':'نسبة الإنجاز',
+  'Project board':'لوحة المهام','Manage your workflow with ease':'تابع شغلك بسهولة','Search tasks':'ابحث عن مهمة',
+  'Filter priority':'فلترة الأولوية','All priorities':'كل الأولويات','High':'عالية','Medium':'متوسطة','Low':'منخفضة',
+  'To do':'للعمل عليها','Done':'مكتمل','No tasks here yet':'لا توجد مهام حاليًا','Add a task':'إضافة مهمة',
+  'Interactive demo: tasks are saved in your browser. No account or backend required.':'تجربة تفاعلية: المهام محفوظة في متصفحك بدون حساب أو خادم.',
+  'Create task':'إنشاء المهمة','Edit task':'تعديل المهمة','Create a task':'إنشاء مهمة','Task title':'عنوان المهمة',
+  'What needs to get done?':'ما المهمة المطلوبة؟','Description':'الوصف','Add some details...':'أضف بعض التفاصيل...',
+  'Status':'الحالة','Priority':'الأولوية','Category':'التصنيف','Development':'تطوير','Design':'تصميم','Marketing':'تسويق',
+  'Delete task':'حذف المهمة','Cancel':'إلغاء','Save changes':'حفظ التغييرات','Close':'إغلاق',
+  'Task created successfully':'تم إنشاء المهمة','Task updated':'تم تحديث المهمة','Task deleted':'تم حذف المهمة',
+  'Design new onboarding screens':'تصميم شاشات الترحيب الجديدة','Map the first-time user journey and create polished UI explorations.':'رسم رحلة المستخدم الجديد وتجربة تصميم واجهات محسّنة.',
+  'Review landing page copy':'مراجعة نصوص صفحة الهبوط','Tighten headlines and simplify supporting messages.':'تحسين العناوين وتبسيط الرسائل.',
+  'Implement navigation menu':'تنفيذ قائمة التنقل','Build responsive keyboard-accessible navigation.':'بناء قائمة متجاوبة تدعم لوحة المفاتيح.',
+  'Prepare product illustrations':'تحضير رسومات المنتج','Explore an expressive direction for feature graphics.':'تجربة اتجاه بصري للرسومات.',
+  'Connect analytics events':'ربط أحداث التحليلات','Track key interactions across the dashboard.':'متابعة التفاعلات الأساسية داخل لوحة البيانات.',
+  'QA the mobile experience':'اختبار تجربة الموبايل','Test layout and interactions at key device widths.':'اختبار التصميم والتفاعل على أحجام شاشات مختلفة.',
+};
+
+const LanguageContext = createContext(null);
+export function LanguageProvider({children}) {
+  const [lang, setLang] = useState(() => {try{return localStorage.getItem('mohamed-portfolio-language') === 'ar' ? 'ar' : 'en'}catch{return 'en'}});
+  useEffect(()=>{
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    try{localStorage.setItem('mohamed-portfolio-language',lang)}catch{/* storage optional */}
+  },[lang]);
+  useEffect(()=>{const onPearl=e=>{if(e.detail==='ar'||e.detail==='en')setLang(e.detail)};window.addEventListener('portfolio:lang',onPearl);return()=>window.removeEventListener('portfolio:lang',onPearl)},[]);
+  const value = useMemo(()=>({lang,setLang, t:(s)=>lang==='ar'?(ar[s]??s):s}),[lang]);
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+}
+export function useLanguage(){const value=useContext(LanguageContext);if(!value)throw new Error('Missing LanguageProvider');return value;}
+export function LanguageSwitch({className=''}){const {lang,setLang}=useLanguage();return <div className={`language-switch ${className}`} role="group" aria-label="Language / اللغة"><button type="button" onClick={()=>setLang('en')} aria-pressed={lang==='en'} className={lang==='en'?'is-active':''} lang="en">EN</button><span aria-hidden="true">/</span><button type="button" onClick={()=>setLang('ar')} aria-pressed={lang==='ar'} className={lang==='ar'?'is-active':''} lang="ar">عربي</button></div>}

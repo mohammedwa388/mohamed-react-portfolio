@@ -1,0 +1,18 @@
+.footer{padding:24px clamp(20px,5vw,48px);border-top:1px solid #ffffff19;background:#0b0b19a8}
+.inner{max-width:1160px;margin:auto;display:flex;gap:20px;align-items:center;justify-content:space-between}
+.identity{text-decoration:none;display:flex;align-items:center;gap:12px;min-width:0}
+.identity img{width:42px;height:42px;border-radius:50%;display:block;object-fit:cover;box-shadow:0 10px 26px rgba(0,0,0,.32)}
+.identity span{display:flex;flex-direction:column;min-width:0}
+.identity strong{color:#f6f4ff;font-size:.92rem;font-weight:700;white-space:nowrap}
+.identity small{color:#8f93ad;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.inner p{font-size:.77rem;color:#8c90ac;margin:0;text-align:center}
+.top{text-decoration:none;color:#c8bbff;font-size:.78rem;white-space:nowrap}
+@media(max-width:700px){.inner{flex-direction:column;gap:14px}.identity strong{white-space:normal;text-align:center}.identity,.identity span{align-items:center}.inner p{text-align:center}}
+
+.inner p{text-align:start}.top{white-space:nowrap}
+@media(max-width:540px){.inner{text-align:center}.inner p{text-align:center}}
+
+/* Same portrait treatment as the hero preview and navigation avatar. */
+.identity img{object-position:center;border:2px solid #82b4ff;box-shadow:0 0 0 3px #82b4ff35,0 10px 26px rgba(0,0,0,.32)}
+.top{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 12px;border-radius:10px;border:1px solid #ab98ff48;background:#b5a3ff10;transition:background .2s,color .2s}
+.top:hover,.top:focus-visible{background:#b5a3ff24;color:#fff}

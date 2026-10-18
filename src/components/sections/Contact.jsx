@@ -1,0 +1,17 @@
+import {useState} from 'react';
+import {socials} from '../../data/socials';
+import {useLanguage} from '../../i18n';
+import {GithubIcon,LinkedinIcon,MailIcon} from '../ui/Icons';
+import styles from './Contact.module.css';
+export default function Contact(){const {t}=useLanguage();const [form,setForm]=useState({name:'',email:'',message:''});const configured=Boolean(socials.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(socials.email));
+ function submit(e){e.preventDefault();if(!configured)return;const subject=encodeURIComponent(`Project inquiry from ${form.name}`);const body=encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`);window.location.href=`mailto:${socials.email}?subject=${subject}&body=${body}`;}
+ return <section id="contact" className={styles.contact}><div className={styles.inner}><div className={styles.info}><p className="section-kicker">{t('Contact')}</p><h2 className="section-title">{t('Have a project in mind?')}</h2><p className="section-copy">{t('I’m open to freelance projects and front-end opportunities. Send me a message and let’s talk about your idea.')}</p><div className={styles.channels}>
+ {configured&&<a href={`mailto:${socials.email}`}><span className={styles.icon}><MailIcon/></span><span><small>{t('Email')}</small><strong>{socials.email}</strong></span><span>↗</span></a>}
+ {socials.phone&&<a href={`tel:${socials.phoneInternational}`}><span className={styles.icon} aria-hidden="true">☎</span><span><small>{t('Phone')}</small><strong dir="ltr">{socials.phone}</strong></span><span>↗</span></a>}
+ {socials.phone&&<a href={`https://wa.me/${socials.phoneInternational.replace('+','')}`} target="_blank" rel="noreferrer"><span className={styles.icon} aria-hidden="true">↗</span><span><small>WhatsApp</small><strong>{t('Contact on WhatsApp')}</strong></span><span>↗</span></a>}
+ {socials.khamsat&&<a href={socials.khamsat} target="_blank" rel="noreferrer"><span className={styles.icon} aria-hidden="true">◈</span><span><small>{t('Khamsat')}</small><strong>{t('My services on Khamsat')}</strong></span><span>↗</span></a>}
+ {socials.github&&<a href={socials.github} target="_blank" rel="noreferrer"><span className={styles.icon}><GithubIcon/></span><span><small>GitHub</small><strong>GitHub</strong></span><span>↗</span></a>}
+ {socials.linkedin&&<a href={socials.linkedin} target="_blank" rel="noreferrer"><span className={styles.icon}><LinkedinIcon/></span><span><small>LinkedIn</small><strong>LinkedIn</strong></span><span>↗</span></a>}
+ </div></div>
+ {configured&&<form className={styles.form} onSubmit={submit}><div className={styles.formIntro}><h3>{t('Start a conversation')}</h3><p>{t('Tell me a little about your project.')}</p></div><div className={styles.two}><label>{t('Your name')}<input autoComplete="name" required placeholder={t('Your name')} value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/></label><label>{t('Your email')}<input type="email" autoComplete="email" required placeholder="you@example.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/></label></div><label>{t('Project details')}<textarea required rows="5" placeholder={t('What are you working on?')} value={form.message} onChange={e=>setForm({...form,message:e.target.value})}/></label><button className="btn-primary" type="submit">{t('Open email to send')} ↗</button><p className={styles.note}>{t('Opens your email app with your message ready to send.')}</p></form>}
+ </div></section>}

@@ -1,0 +1,61 @@
+/* One skill card. Works on its own: colors have fallbacks. */
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(var(--accent-rgb, 167, 139, 250), 0.18);
+    background: rgba(15, 13, 32, 0.55);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.badge:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--accent-rgb, 167, 139, 250), 0.45);
+    box-shadow: 0 14px 40px rgba(var(--accent-rgb, 167, 139, 250), 0.15);
+}
+
+.iconBox {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(var(--accent-rgb, 167, 139, 250), 0.18);
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.name {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+}
+
+.description {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(203, 213, 255, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .badge {
+        transition: none;
+    }
+}

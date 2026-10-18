@@ -1,0 +1,238 @@
+/* Project card.
+   Idle: calm dark card with a thin border (no motion).
+   Hover/focus: it lifts, a glow appears behind it, and a violet-blue
+   gradient travels around the border. */
+
+.card {
+    --accent-rgb: 167, 139, 250;
+
+    position: relative;
+    isolation: isolate;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+/* soft glow behind the card */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    z-index: -1;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #7c5cff, #3b82f6);
+    filter: blur(32px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.card:hover,
+.card:focus-within {
+    transform: translateY(-6px);
+}
+
+.card:hover::before,
+.card:focus-within::before {
+    opacity: 0.35;
+}
+
+/* The frame's padding is the border thickness */
+.frame {
+    position: relative;
+    height: 100%;
+    padding: 1.5px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(var(--accent-rgb), 0.2);
+}
+
+/* gradient that rotates around the border (only while hovering) */
+.frame::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 220deg,
+        #7c5cff 285deg,
+        #60a5fa 330deg,
+        transparent 360deg
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: spin 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.card:hover .frame::before,
+.card:focus-within .frame::before {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 18.5px;
+    background: #0e0c1f;
+}
+
+/* ---------- Image ---------- */
+.media {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(var(--accent-rgb), 0.25),
+            transparent 50%
+        ),
+        linear-gradient(135deg, #1b1540, #0b0a18);
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .media img {
+    transform: scale(1.05);
+}
+
+.placeholder {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, rgb(var(--accent-rgb)), #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Text ---------- */
+.body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 22px;
+}
+
+.title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.description {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(203, 213, 255, 0.65);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tags li {
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--accent-rgb), 0.22);
+    background: rgba(var(--accent-rgb), 0.1);
+    font-size: 12px;
+    font-weight: 500;
+    color: #d8d2f5;
+}
+
+/* ---------- Actions ---------- */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 22px;
+}
+
+.details {
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    background: rgba(var(--accent-rgb), 0.1);
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.details:hover {
+    background: rgba(var(--accent-rgb), 0.22);
+    border-color: rgba(var(--accent-rgb), 0.7);
+}
+
+.links {
+    display: flex;
+    gap: 16px;
+}
+
+.links a {
+    font-size: 14px;
+    color: rgba(226, 232, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.links a:hover {
+    color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .media img {
+        transition: none;
+    }
+
+    .card:hover,
+    .card:focus-within {
+        transform: none;
+    }
+
+    .frame::before {
+        animation: none;
+    }
+}
+/* Preserve the original card's softly animated border and glow. */
+.media{text-decoration:none}.media:focus-visible{outline-offset:-5px}.footer{flex-wrap:wrap}.links{flex-wrap:wrap;gap:12px}.links a{font-weight:600}
+@media(max-width:370px){.body{padding:18px}.footer{align-items:flex-start;gap:15px}.links{gap:10px}}
